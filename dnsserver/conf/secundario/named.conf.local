@@ -1,0 +1,28 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+key "a20alejandroro" {
+	algorithm hmac-sha256;
+	secret "0yxHEZ26gQ4+pU6PUkUfZnGJQyg6BHImSrUM5mk8ae8=";
+};
+
+server 192.168.20.10 { 
+    keys { "a20alejandroro"; };
+};
+
+zone "starwars.lan" {
+    type slave;
+    file "db.starwars.lan";
+    masters { 192.168.20.10; };
+};
+
+zone "20.168.192.in-addr.arpa" {
+    type slave;
+    file "db.20.168.192";
+    masters { 192.168.20.10; };
+};
